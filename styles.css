@@ -74,6 +74,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
     width: fit-content;
     gap: clamp(20px, 5vw, 40px);
     margin-top: clamp(20px, 4vw, 30px);
@@ -81,11 +82,10 @@ body {
 
 .event-datetime {
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    justify-content: space-between;
     gap: clamp(15px, 4vw, 40px);
     width: 100%;
-    max-width: fit-content;
 }
 
 @media screen and (min-width: 600px) {
