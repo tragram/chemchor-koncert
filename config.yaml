@@ -1,0 +1,15 @@
+date: "08. 12."
+time: "18:30"
+
+location:
+  name: "České muzeum hudby"
+  address: "Karmelitská 2/4, Malá Strana, Praha 1"
+
+colors:
+  primary: "#4a148c"
+  secondary: "#6a1b9a"
+  background: "#e8e4df"
+
+font: "'Arial', sans-serif"
+
+o_sboru: "ChemChór je pěvecký sbor VŠCHT, který aktivně funguje od roku 2016 a skládá se ze studentů i zaměstnanců. Pravidelně vystupuje na kampusových akcích jako je Hanami nebo Lesamáj, na vlastních akcích a spolupracuje aktivně se školním orchestrem. Zkoušky se konají každé úterý od 18:00 do 20:00. Repertoár sboru zahrnuje duchovní i světskou hudbu od renesance po současnost."
