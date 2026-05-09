@@ -1,9 +1,9 @@
-date: "08. 12."
-time: "18:30"
+date: "12. 5. 2026"
+time: "19:00"
 
 location:
-  name: "České muzeum hudby"
-  address: "Karmelitská 2/4, Malá Strana, Praha 1"
+  name: "Koncertní sál Pražské konzervatoře"
+  address: "Na Rejdišti 1, Praha 1 - Staré Město"
 
 colors:
   primary: "#4a148c"
