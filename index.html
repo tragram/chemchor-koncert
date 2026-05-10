@@ -31,9 +31,7 @@
               <h3>Místo konání</h3>
               <p><strong id="venue-name"></strong></p>
               <p id="venue-address"></p>
-              <p class="entrance-fee">
-                Vstupné dobrovolné
-              </p>
+              <p class="entrance-fee">Vstupné dobrovolné</p>
             </div>
           </div>
         </div>
@@ -50,7 +48,6 @@
         <div class="section" style="margin-top: 50px">
           <h2>O sboru ChemChór</h2>
           <p
-            style="font-size: 1.1em; line-height: 1.4; color: #333"
             id="o-sboru"
           ></p>
         </div>
@@ -122,7 +119,7 @@
               cfg.colors.background_light,
             );
         }
-        
+
         if (cfg.font) {
           const fontName = cfg.font.replace(/'/g, "").split(",")[0].trim();
           const link = document.createElement("link");

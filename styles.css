@@ -7,7 +7,7 @@
 body {
     font-family: var(--font-main);
     background: linear-gradient(135deg, var(--bg-color) 0%, #d4cfc9 100%);
-    color: #1a1a1a;
+    color: var(--color-text, #1a1a1a);
     min-height: 100vh;
 }
 
@@ -37,6 +37,8 @@ body {
     text-align: center;
 }
 
+/* Font scale: xl=2em  lg=1.6em  md=1.2em  sm=0.85em */
+
 h1 {
     font-size: 2em;
     font-weight: 900;
@@ -51,7 +53,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: 700;
     opacity: 0.9;
 }
@@ -73,7 +75,6 @@ h3 {
 
 .event-datetime {
     display: flex;
-    justify-content: center;
     justify-content: space-between;
     gap: 20px;
     width: 100%;
@@ -94,7 +95,7 @@ h3 {
 }
 
 .info-box p {
-    font-size: 1.4em;
+    font-size: 1.6em;
     font-weight: bold;
 }
 
@@ -103,7 +104,6 @@ h3 {
 }
 
 .venue {
-    /* background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); */
     background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -116,11 +116,10 @@ h3 {
 
 .venue h3 {
     margin-bottom: 5px;
-    opacity: 0.9;
 }
 
 .venue p {
-    font-size: 0.8em;
+    font-size: 0.85em;
 }
 
 .content {
@@ -158,7 +157,6 @@ h3 {
 
 /* When two items are adjacent, collapse the gap and flatten the touching corners */
 .programme-item + .programme-item {
-    /* margin-top: -15px; */
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
@@ -169,32 +167,28 @@ h3 {
     border-bottom-right-radius: 0;
 }
 
-/* Restore full bottom margin after the last item in a run */
-.programme-item:not(:has(+ .programme-item)) {
-    /* margin-bottom: 15px; */
-}
-
 .programme-item h3 {
     color: var(--color-primary);
-    margin-bottom: 5px;
+    margin-bottom: 0px;
+    font-weight: 700;
 }
 
 .programme-item p {
-    font-size: 1em;
+    font-size: 0.9em;
     color: var(--color-secondary);
-    font-style: italic;
-    font-weight: 600;
+    /* font-style: italic; */
+    font-weight: 500;
 }
 
 .footer {
-    background: #1a1a1a;
+    background: var(--color-text, #1a1a1a);
     color: white;
     padding: clamp(15px, 3vw, 20px);
     text-align: center;
 }
 
 .footer p {
-    font-size: clamp(0.9em, 2vw, 1.1em);
+    font-size: 0.85em;
     margin: 5px 0;
 }
 
@@ -219,7 +213,7 @@ h3 {
 
 .programme-block-title span {
     color: var(--color-secondary);
-    font-size: 0.85em;
+    font-size: 0.9em;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -229,16 +223,15 @@ h3 {
 }
 
 .programme-intermission {
-    margin: 20px 0;
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: 700;
     letter-spacing: 0.2em;
-    color: #FFFFFF;
+    color: white;
     text-transform: uppercase;
     background: var(--color-secondary);
     margin-bottom: 2em;
     margin-top: 2em;
-    height: 80.6px;
+    height: 75.6px;
     border-radius: 10px;
     display: flex;
     align-items: center;
