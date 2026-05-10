@@ -116,6 +116,11 @@
               "--bg-color",
               cfg.colors.background,
             );
+          if (cfg.colors.background_light)
+            document.documentElement.style.setProperty(
+              "--bg-color-light",
+              cfg.colors.background_light,
+            );
         }
         
         if (cfg.font) {
@@ -132,16 +137,33 @@
         console.log(data);
         const list = document.getElementById("programme-list");
         list.innerHTML = data
-          .map((item) =>
-            item.title && item.artist
-              ? `
-                    <div class="programme-item">
-                        <h3>${item.title}</h3>
-                        <p>${item.artist}</p>
-                    </div>
-                `
-              : '<div class="empty-space"></div>',
-          )
+          .map((item) => {
+            const title = (item.title || "").trim();
+            const artist = (item.artist || "").trim();
+
+            // Block heading: title starts with #
+            if (title.startsWith("#")) {
+              const label = title.slice(1).trim();
+              return `<div class="programme-block-title"><span>${label}</span></div>`;
+            }
+
+            // Intermission: title is "---" or "PŘESTÁVKA" (case-insensitive)
+            if (title === "---" || title.toLowerCase() === "přestávka") {
+              return `<div class="programme-intermission"><span> Přestávka</span></div>`;
+            }
+
+            // Regular song item
+            if (title && artist) {
+              return `
+                <div class="programme-item">
+                  <h3>${title}</h3>
+                  <p>${artist}</p>
+                </div>`;
+            }
+
+            // Empty line spacer
+            return '<div class="empty-space"></div>';
+          })
           .join("");
       }
     </script>

@@ -9,7 +9,8 @@ colors:
   primary: "#4a148c"
   secondary: "#6a1b9a"
   background: "#c1a8d0"
+  background_light: "#c1a8d01a" 
 
-font: "'Arial', sans-serif"
+font: "'Open Sans', sans-serif"
 
 o_sboru: "ChemChór je pěvecký sbor VŠCHT, který aktivně funguje od roku 2016 a skládá se ze studentů i zaměstnanců. Pravidelně vystupuje na kampusových akcích jako je Hanami nebo Lesamáj, na vlastních akcích a spolupracuje aktivně se školním orchestrem. Zkoušky se konají každé úterý od 18:00 do 20:00. Repertoár sboru zahrnuje duchovní i světskou hudbu od renesance po současnost."
