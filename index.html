@@ -1,113 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ChemChór - koncert</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <h1>PĚVECKÝ SBOR</h1>
-            <h2>CHEMCHÓR</h2>
-            <h3>KONCERT</h3>
-            <div class="info-wrapper">
-                
-            <div class="event-info">
-                <div class="event-datetime">
-                    <div class="info-box">
-                        <h3>Datum</h3>
-                        <p id="event-date"></p>
-                    </div>
-                    <div class="info-box">
-                        <h3>Čas</h3>
-                        <p id="event-time"></p>
-                    </div>
-                </div>
-                <div class="venue">
-                    <h3>Místo konání</h3>
-                    <p><strong id="venue-name"></strong></p>
-                    <p id="venue-address"></p>
-                    <p style="margin-top: 20px; font-size: 1em; opacity: 0.9;">
-                        Vstupné dobrovolné
-                    </p>
-                </div>
+      <div class="header">
+        <h1>PĚVECKÝ SBOR</h1>
+        <h2>CHEMCHÓR</h2>
+        <h3>KONCERT</h3>
+        <div class="info-wrapper">
+          <div class="event-info">
+            <div class="event-datetime">
+              <div class="info-box">
+                <h3>Datum</h3>
+                <p id="event-date"></p>
+              </div>
+              <div class="info-box">
+                <h3>Čas</h3>
+                <p id="event-time"></p>
+              </div>
             </div>
+            <div class="venue">
+              <h3>Místo konání</h3>
+              <p><strong id="venue-name"></strong></p>
+              <p id="venue-address"></p>
+              <p style="margin-top: 20px; font-size: 1em; opacity: 0.9">
+                Vstupné dobrovolné
+              </p>
             </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="content">
+        <div class="section">
+          <h2>Program koncertu</h2>
+          <div id="programme-list">
+            <div class="loading">Načítání programu...</div>
+          </div>
         </div>
 
-        <div class="content">
-            <div class="section">
-                <h2>Program koncertu</h2>
-                <div id="programme-list">
-                    <div class="loading">Načítání programu...</div>
-                </div>
-            </div>
-
-            <div class="section" style="margin-top: 50px;">
-                <h2>O sboru ChemChór</h2>
-                <p style="font-size: 1.1em; line-height: 1.4; color: #333;" id="o-sboru">
-                </p>
-            </div>
+        <div class="section" style="margin-top: 50px">
+          <h2>O sboru ChemChór</h2>
+          <p
+            style="font-size: 1.1em; line-height: 1.4; color: #333"
+            id="o-sboru"
+          ></p>
         </div>
+      </div>
 
-        <div class="footer">
-            <p>Vysoká škola chemicko-technologická v Praze</p>
-            <p>Unie českých pěveckých sborů</p>
-        </div>
+      <div class="footer">
+        <p>Vysoká škola chemicko-technologická v Praze</p>
+        <p>Unie českých pěveckých sborů</p>
+      </div>
     </div>
 
     <script>
-        // Load config and programme
-        Promise.all([
-            fetch('config.yaml').then(r => r.text()).then(jsyaml.load),
-            fetch('programme.csv').then(r => r.text())
-        ]).then(([config, csv]) => {
-            applyConfig(config);
-            displayProgramme(Papa.parse(csv, { header: true, skipEmptyLines: false,delimiter:";" }).data);
-        }).catch(err => {
-            console.error('Loading error:', err);
-            document.getElementById('programme-list').innerHTML = 
-                '<p style="color: #d32f2f; text-align: center;">Chyba při načítání dat</p>';
+      // Load config and programme
+      Promise.all([
+        fetch("config.yaml")
+          .then((r) => r.text())
+          .then(jsyaml.load),
+        fetch("programme.csv").then((r) => r.text()),
+      ])
+        .then(([config, csv]) => {
+          applyConfig(config);
+          displayProgramme(
+            Papa.parse(csv, {
+              header: true,
+              skipEmptyLines: false,
+              delimiter: ";",
+            }).data,
+          );
+        })
+        .catch((err) => {
+          console.error("Loading error:", err);
+          document.getElementById("programme-list").innerHTML =
+            '<p style="color: #d32f2f; text-align: center;">Chyba při načítání dat</p>';
         });
 
-        function applyConfig(cfg) {
-            if (cfg.date) document.getElementById('event-date').textContent = cfg.date;
-            if (cfg.time) document.getElementById('event-time').textContent = cfg.time;
-            if (cfg.location) {
-                document.getElementById('venue-name').textContent = cfg.location.name;
-                document.getElementById('venue-address').textContent = cfg.location.address;
-            }
-            if(cfg.o_sboru){
-                document.getElementById("o-sboru").textContent = cfg.o_sboru;
-            }
-            
-            if (cfg.colors) {
-                if (cfg.colors.primary) document.documentElement.style.setProperty('--color-primary', cfg.colors.primary);
-                if (cfg.colors.secondary) document.documentElement.style.setProperty('--color-secondary', cfg.colors.secondary);
-                if (cfg.colors.background) document.documentElement.style.setProperty('--bg-color', cfg.colors.background);
-            }
-
-            if (cfg.font) document.documentElement.style.setProperty('--font-main', cfg.font);
+      function applyConfig(cfg) {
+        if (cfg.date)
+          document.getElementById("event-date").textContent = cfg.date;
+        if (cfg.time)
+          document.getElementById("event-time").textContent = cfg.time;
+        if (cfg.location) {
+          document.getElementById("venue-name").textContent = cfg.location.name;
+          document.getElementById("venue-address").textContent =
+            cfg.location.address;
+        }
+        if (cfg.o_sboru) {
+          document.getElementById("o-sboru").textContent = cfg.o_sboru;
         }
 
-        function displayProgramme(data) {
-            console.log(data)
-            const list = document.getElementById('programme-list');
-            list.innerHTML = data.map(item => 
-                item.title && item.artist ? `
+        if (cfg.colors) {
+          if (cfg.colors.primary)
+            document.documentElement.style.setProperty(
+              "--color-primary",
+              cfg.colors.primary,
+            );
+          if (cfg.colors.secondary)
+            document.documentElement.style.setProperty(
+              "--color-secondary",
+              cfg.colors.secondary,
+            );
+          if (cfg.colors.background)
+            document.documentElement.style.setProperty(
+              "--bg-color",
+              cfg.colors.background,
+            );
+        }
+        
+        if (cfg.font) {
+          const fontName = cfg.font.replace(/'/g, "").split(",")[0].trim();
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, "+")}:wght@400;600;700&display=swap`;
+          document.head.appendChild(link);
+          document.documentElement.style.setProperty("--font-main", cfg.font);
+        }
+      }
+
+      function displayProgramme(data) {
+        console.log(data);
+        const list = document.getElementById("programme-list");
+        list.innerHTML = data
+          .map((item) =>
+            item.title && item.artist
+              ? `
                     <div class="programme-item">
                         <h3>${item.title}</h3>
                         <p>${item.artist}</p>
                     </div>
-                ` : '<div class="empty-space"></div>'
-            ).join('');
-        }
+                `
+              : '<div class="empty-space"></div>',
+          )
+          .join("");
+      }
     </script>
-</body>
+  </body>
 </html>
