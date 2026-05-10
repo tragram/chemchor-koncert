@@ -69,7 +69,7 @@
             fetch('programme.csv').then(r => r.text())
         ]).then(([config, csv]) => {
             applyConfig(config);
-            displayProgramme(Papa.parse(csv, { header: true, skipEmptyLines: true }).data);
+            displayProgramme(Papa.parse(csv, { header: true, skipEmptyLines: false,delimiter:";" }).data);
         }).catch(err => {
             console.error('Loading error:', err);
             document.getElementById('programme-list').innerHTML = 
@@ -97,6 +97,7 @@
         }
 
         function displayProgramme(data) {
+            console.log(data)
             const list = document.getElementById('programme-list');
             list.innerHTML = data.map(item => 
                 item.title && item.artist ? `
@@ -104,7 +105,7 @@
                         <h3>${item.title}</h3>
                         <p>${item.artist}</p>
                     </div>
-                ` : ''
+                ` : '<div class="empty-space"></div>'
             ).join('');
         }
     </script>
