@@ -47,9 +47,7 @@
 
         <div class="section" style="margin-top: 50px">
           <h2>O sboru ChemChór</h2>
-          <p
-            id="o-sboru"
-          ></p>
+          <p id="o-sboru"></p>
         </div>
       </div>
 
@@ -139,10 +137,9 @@
 
             // Block heading: title starts with #
             if (title.startsWith("#")) {
-              const label = title.slice(1).trim();
+              const label = title.slice(1).trim().replace(/\\n/g, "<br>");
               return `<div class="programme-block-title"><span>${label}</span></div>`;
             }
-
             // Intermission: title is "---" or "PŘESTÁVKA" (case-insensitive)
             if (title === "---" || title.toLowerCase() === "přestávka") {
               return `<div class="programme-intermission"><span> Přestávka</span></div>`;

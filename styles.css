@@ -156,7 +156,7 @@ h3 {
 }
 
 /* When two items are adjacent, collapse the gap and flatten the touching corners */
-.programme-item + .programme-item {
+.programme-item+.programme-item {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
@@ -217,7 +217,8 @@ h3 {
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
     margin-left: 0.5em;
     margin-right: 0.5em;
 }
