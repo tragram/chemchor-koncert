@@ -156,6 +156,24 @@ h3 {
     border-left: 10px solid var(--color-secondary);
 }
 
+/* When two items are adjacent, collapse the gap and flatten the touching corners */
+.programme-item + .programme-item {
+    /* margin-top: -15px; */
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.programme-item:has(+ .programme-item) {
+    margin-bottom: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Restore full bottom margin after the last item in a run */
+.programme-item:not(:has(+ .programme-item)) {
+    /* margin-bottom: 15px; */
+}
+
 .programme-item h3 {
     color: var(--color-primary);
     margin-bottom: 5px;
@@ -212,7 +230,6 @@ h3 {
 
 .programme-intermission {
     margin: 20px 0;
-    text-align: center;
     font-size: 1.1em;
     font-weight: 700;
     letter-spacing: 0.2em;
@@ -225,6 +242,7 @@ h3 {
     border-radius: 10px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .programme-intermission span {
